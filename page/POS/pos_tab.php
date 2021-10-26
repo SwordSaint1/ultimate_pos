@@ -1,8 +1,19 @@
 <style type="text/css">
 	fieldset, table, th, td {
-  border: 1px solid black;
+  border: 2px solid gray;
   border-collapse: collapse;
+
 }
+
+th{
+	background-color: #1565c0;
+	color: white;
+}
+
+table{
+	font-family: ubuntu;
+}
+
 </style>
 
 <div class="col l12 m12 s12">
@@ -45,11 +56,13 @@
 
 
 		<div class="col l4 m12 s12">
+			
 			<fieldset>
-<legend> Transaction</legend>
-<table>
+<legend id="TRID" name="TRID"> Transaction</legend>
+<table class="striped highlight centered">
 <thead>
   <tr>
+  	<th>#</th>
     <th>Product Name</th>
     <th>Price</th>
     <th>Qty</th>
@@ -59,27 +72,47 @@
   <tbody id="orders">
  
   </tbody>
+
+
   <tfooter>
   <tr>
   	  <td colspan="3" style="text-align:right;">Sub Total:</td>
-  <td colspan=""></td>
+  <td colspan="2" id="subtotal_data"></td>
   </tr>
   <tr>
   <td colspan="3" style="text-align:right;">Payment:</td>
-  <td colspan=""></td>
+  <td colspan="2"><input type="number" name="payment" id="payment" onchange="payment('subtotal_data')"></td>
   </tr>
   <tr>
+  	<td colspan="3" style="text-align:right;">Change:</td>
+    <td colspan="2" id="change"> </td>
+  </tr>
+   <tr>
   	<td colspan="3" style="text-align:right;">Grand Total:</td>
-    <td colspan=""> </td>
+    <td colspan="2" id="grand_total"> </td>
   </tr>
   </tfooter>
-  
 </table>
+
 </fieldset>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
+	// GENERATE TR Code
+const generateTr =()=>{
+    $.ajax({
+        url: '../process/processor.php',
+        type: 'POST',
+        cache: false,
+        data:{
+            method: 'generateTrCode'
+        },success:function(response){
+            $('#TRID').html(response);
+        }
+    });
+} 
+
 
 
 	const add_qty =(x)=>{
@@ -104,9 +137,10 @@
 				 var product_name = document.querySelector('#product_name'+x).innerHTML;
 				  var price = document.querySelector('#price'+x).innerHTML;
 				   var quantity = document.querySelector('#quantity' +x).value;
+						var tr = document.querySelector('#TRID').innerHTML;
 				 console.log(product_name);
 				 console.log(price);
-				 console.log(quantity);
+				 console.log(tr);
 
 				 $.ajax({
 				 url: '../process/processor.php',
@@ -117,13 +151,14 @@
             id:x,
             product_name:product_name,
             price:price,
-            quantity:quantity	
+            quantity:quantity,
+            tr:tr
         },success:function(response){
            console.log(response);
           if(response == 'success'){
-   
+   	
           	M.toast({html:'Ordered'});
-
+          	setTimeout(load_order, 1000);
           	$('#quantity'+x).val('1');
           }else{
           	M.toast({html:'Error'});
@@ -142,8 +177,26 @@ const load_order =()=>{
             method:'prev_order'
         },success:function(response){
             $('#orders').html(response);
+            var subtotal = [];
+            $('.subtotal').each(function(){
+            	subtotal.push($(this).html());
+            });
+
+            $('#subtotal_data').html(eval(subtotal.join('+')));
+            $('#grand_total').html(eval(subtotal.join('+')));
         }
     });
 
+}
+
+function payment(subtotal){
+	var subtotal =  document.getElementById(subtotal).innerHTML;
+	var payment = document.getElementById('payment').value;
+	
+	var compute = parseFloat(payment - subtotal);
+
+	$('#change').html(compute);
+	console.log(compute);
+	
 }
 </script>

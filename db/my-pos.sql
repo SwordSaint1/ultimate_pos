@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2021 at 11:01 AM
+-- Generation Time: Oct 26, 2021 at 09:27 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -41,27 +41,13 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `transaction_no`, `product_name`, `price`, `quantity`, `total`) VALUES
-(1, NULL, 'Lomi-S', 1, 50, NULL),
-(2, NULL, 'Lomi-S', 2, 50, NULL),
-(3, NULL, 'Lomi-S', 2, 50, 100),
-(4, NULL, 'Lomi-S', 1, 50, 50),
-(5, NULL, 'Lomi-S', 1, 50, 50),
-(6, NULL, 'Lomi-S', 1, 50, 50),
-(7, NULL, 'Lomi-S', 1, 50, 50),
-(8, NULL, 'Lomi-S', 1, 50, 50),
-(9, NULL, 'Lomi-S', 1, 50, 50),
-(10, NULL, 'Lomi-S', 2, 50, 100),
-(11, NULL, 'Lomi-S', 4, 50, 200),
-(12, NULL, 'Lomi-S', 3, 50, 150),
-(13, NULL, 'Lomi-S', 4, 50, 200),
-(14, NULL, 'Lomi-S', 6, 50, 300),
-(15, NULL, 'Lomi-S', 3, 50, 150),
-(16, NULL, 'Lomi-S', 2, 50, 100),
-(17, NULL, 'Lomi-S', 1, 50, 50),
-(18, NULL, 'Lomi-D', 1, 80, 80),
-(19, NULL, 'Lomi-S', 1, 50, 50),
-(20, NULL, 'Lomi-S', 1, 50, 50),
-(21, NULL, 'Lomi-S', 1, 50, 50);
+(1, 'TR:21102645115', 'Lomi-S', 50, 1, 50),
+(2, 'TR:21102645115', 'Lomi-S', 50, 2, 100),
+(3, 'TR:21102611185', 'Lomi-D', 80, 2, 160),
+(4, 'TR:21102640593', 'Lomi-S', 50, 1, 50),
+(5, 'TR:21102630823', 'Lomi-D', 80, 1, 80),
+(6, 'TR:21102630823', 'Lomi-D', 80, 1, 80),
+(7, 'TR:21102630823', 'Lomi-D', 80, 3, 240);
 
 -- --------------------------------------------------------
 
@@ -134,7 +120,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`

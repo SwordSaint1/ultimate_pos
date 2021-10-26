@@ -106,26 +106,14 @@
 ?>
 
 <!-- JS -->
-    
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>    
 <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <script type="text/javascript" src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.modal').modal({
-            inDuration: 300,
-            outDuration: 300
-        });
-        $('.sidenav').sidenav();
-         $('.tabs').tabs();
-   
-     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoClose:true
-     });
-
-     $('select').formSelect();
-     load_order();
-    });
+      load_order(); 
+      generateTr(); 
+       });
 
 
 
