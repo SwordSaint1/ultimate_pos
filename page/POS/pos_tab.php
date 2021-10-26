@@ -168,6 +168,9 @@ const generateTr =()=>{
 		}
 
 const load_order =()=>{
+	var tr = document.querySelector('#TRID').innerHTML;
+
+	console.log(tr);
 
 				 $.ajax({
         url:'../process/processor.php',
